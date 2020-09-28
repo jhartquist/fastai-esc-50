@@ -1,4 +1,4 @@
-program: sweep_1.py
+program: sweep_hop_win.py
 method: grid
 project: fastai-esc-50
 parameters:
