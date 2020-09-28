@@ -1,0 +1,10 @@
+program: sweep_1.py
+method: grid
+project: fastai-esc-50
+parameters:
+  hop_length:
+    values: [64, 96, 128, 160, 192, 224, 256, 288, 320]
+  win_length:
+    values: [320, 480, 640, 800, 960, 1120, 1280, 1440, 1600]
+  trial_num:
+    values: [1, 2, 3, 4, 5]
