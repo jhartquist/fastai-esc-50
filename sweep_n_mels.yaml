@@ -4,7 +4,7 @@ project: fastai-esc-50
 parameters:
   n_mels:
     values: [32,  64,  96, 128, 160, 192, 224, 256, 288, 320, 352, 384, 416, 448, 480, 512]
-  batch_size:
+  n_epochs:
     values: [10, 20, 40, 80]
   trial_num:
     values: [1, 2, 3, 4, 5]
