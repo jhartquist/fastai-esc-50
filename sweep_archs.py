@@ -10,7 +10,7 @@ run_config = dict(
     n_mels=256,
 
     # model
-    arch='resnet201',
+    arch='densenet201',
 
     # training
     learning_rate=1e-2,
