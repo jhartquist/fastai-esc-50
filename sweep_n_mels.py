@@ -1,10 +1,6 @@
 from utils import *
 assert torch.cuda.is_available()
 
-# should be fixed by wandb==0.10.3
-# https://github.com/wandb/client/issues/1248#issuecomment-696933966
-os.environ['WANDB_SAVE_CODE'] = 'true'
-
 run_config = dict(
     # spectrum
     sample_rate=16000,
@@ -30,6 +26,7 @@ run_config = dict(
 run = wandb.init(
     project='fastai-esc-50',
     config=run_config,
+    save_code=True,
 )
 
 config = wandb.config

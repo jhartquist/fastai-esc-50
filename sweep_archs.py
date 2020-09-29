@@ -7,16 +7,20 @@ run_config = dict(
     hop_length=160,
     win_length=800,
     n_fft=2048,
-    n_mels=128,
+    n_mels=256,
 
     # model
-    arch='resnet18',
+    arch='resnet201',
 
     # training
     learning_rate=1e-2,
     n_epochs=20,
+    batch_size=64,
+    mix_up=0.1,
+    
+    # data
     trial_num=1,
-    batch_size=32,
+    fold=1,
 )
 
 run = wandb.init(
@@ -26,9 +30,6 @@ run = wandb.init(
 )
 
 config = wandb.config
-
-# create a composite key for grouping trials in sweep
-config.update({'hop_win': f"{config.hop_length}_{config.win_length}"})
 
 print("Config:", json.dumps(config.as_dict(), indent=2))
 
@@ -45,16 +46,17 @@ to_spectrum = AudioToSpec.from_cfg(audio_config)
 data = get_data(batch_tfms=[to_spectrum], 
                 sample_rate=config.sample_rate,
                 batch_size=config.batch_size,
+                fold=config.fold,
                 seed=config.trial_num)
 
 arch = eval(config.arch)
 
 learn = get_learner(data, arch)
 
-cbs = [
-    MixUp(),
-    WandbCallback(log_model=False, log_preds=False),
-]
+cbs = []
+if config.mix_up: 
+    cbs.append(MixUp(config.mix_up))
+cbs.append(WandbCallback(log_model=False, log_preds=False))
 
 learn.fine_tune(config.n_epochs, 
                 base_lr=config.learning_rate, 
