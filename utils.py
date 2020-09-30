@@ -34,3 +34,20 @@ def get_learner(data, arch, n_channels=1, pretrained=True):
                        pretrained=pretrained,
                        loss_fn=CrossEntropyLossFlat, 
                        metrics=accuracy).to_fp16()
+
+
+class StackedMelSpectrogram(Transform):    
+    def __init__(self, n_fft, n_mels, sample_rate, win_lengths, hop_length, f_max=None):
+        assert max(win_lengths) <= n_fft
+        self.specs = [AudioToSpec.from_cfg(
+            AudioConfig.BasicMelSpectrogram(n_fft=n_fft,
+                                            hop_length=hop_length,
+                                            win_length=win_length,
+                                            normalized=True,
+                                            n_mels=n_mels,
+                                            f_max=f_max,
+                                            sample_rate=sample_rate)) 
+                      for win_length in win_lengths]
+
+    def encodes(self, x: AudioTensor) -> AudioSpectrogram:       
+        return AudioSpectrogram(torch.cat([spec(x) for spec in self.specs], axis=1))

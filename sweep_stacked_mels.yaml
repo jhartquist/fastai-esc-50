@@ -1,0 +1,14 @@
+program: sweep_stacked_mels.py
+method: grid
+project: fastai-esc-50
+parameters:
+  n_mels:
+    values: [96, 128, 256, 384, 512]
+  win_length_1:
+    values: [160, 320]
+  win_length_2:
+    values: [640, 800]
+  win_length_3:
+    values: [1280, 1600]
+  trial_num:
+    values: [1, 2, 3, 4, 5]
