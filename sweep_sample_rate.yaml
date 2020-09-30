@@ -1,0 +1,10 @@
+program: sweep_sample_rate.py
+method: grid
+project: fastai-esc-50
+parameters:
+  sample_rate:
+    values: [8000, 16000, 22050, 32000, 44100]
+  n_epochs:
+    values: [10, 20, 40, 80]
+  trial_num:
+    values: [1, 2, 3, 4, 5]
