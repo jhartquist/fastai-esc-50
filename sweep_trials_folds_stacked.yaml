@@ -1,0 +1,8 @@
+program: sweep_trials_folds_stacked.py
+method: grid
+project: fastai-esc-50
+parameters:
+  trial_num:
+    values: [1, 2, 3, 4, 5]
+  fold:
+    values: [1, 2, 3, 4, 5]
