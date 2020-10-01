@@ -1,0 +1,14 @@
+program: sweep_stacked_mels_archs.py
+method: grid
+project: fastai-esc-50
+parameters:
+  n_mels:
+    values: [128, 192, 256]
+  arch:
+    values:
+    - resnet18
+    - resnet50
+    - densenet169
+    - densenet201
+  trial_num:
+    values: [1, 2, 3, 4, 5]
