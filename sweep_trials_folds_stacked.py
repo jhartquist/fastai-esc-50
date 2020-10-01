@@ -18,7 +18,7 @@ run_config = dict(
     # training
     learning_rate=1e-2,
     n_epochs=80,
-    batch_size=32,
+    batch_size=128,
     mix_up=0.4,
     
     # data
