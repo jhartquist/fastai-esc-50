@@ -1,0 +1,12 @@
+program: sweep_norm.py
+method: grid
+project: fastai-esc-50
+parameters:
+  norm:
+    value: True
+  n_epochs:
+    value: 80
+  trial_num:
+    values: [1, 2, 3, 4, 5]
+  fold:
+    values: [1, 2, 3, 4, 5]
