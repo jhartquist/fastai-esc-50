@@ -12,12 +12,9 @@ def CrossValidationSplitter(col='fold', fold=1):
         return IndexSplitter(mask2idxs(valid_idx))(o)
     return _inner
 
-class StackedMelSpecs(Transform):
-    "Stacks Mel spectrograms with different resolutions into a single image."
-    
+class StackedMelSpectrogram(Transform):    
     def __init__(self, n_fft, n_mels, sample_rate, win_lengths, hop_length, f_max=None):
         store_attr()
-        # mel spectrum extractors
         assert max(win_lengths) <= n_fft
         self.specs = [AudioToSpec.from_cfg(
             AudioConfig.BasicMelSpectrogram(n_fft=n_fft,
